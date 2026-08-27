@@ -9,6 +9,7 @@ associados.
 ## Stack
 
 - **Python 3** + **Flask** — servidor e rotas
+- **pytest** — testes automatizados
 - Dados em arquivo **JSON** (sem banco de dados por enquanto)
 - **HTML/CSS/JS** simples para uma página de testes manuais
 
@@ -23,6 +24,9 @@ associados.
 │   └── pontos.json         # Base de pontos (id, nome, sintomas, localização, orientação)
 ├── templates/
 │   └── index.html           # Página visual para testar o serviço no navegador
+├── tests/
+│   ├── test_repository.py   # Testes de unidade (lógica de matching)
+│   └── test_app.py          # Testes de integração (endpoints via Flask test client)
 └── requirements.txt
 ```
 
@@ -65,13 +69,32 @@ ser adicionados diretamente nesse arquivo, seguindo a mesma estrutura de campos.
 
 ## Como testar
 
-- **Pela página visual:** acesse `http://127.0.0.1:5000/` — tem campo de busca por
-  sintomas, botões de teste rápido com casos já validados, e um botão para listar
-  todos os pontos.
+- **Pela página visual (deploy online):** https://qia-microsservice.vercel.app/ — conectado
+  ao repositório do GitHub, atualiza automaticamente a cada mudança no repo.
+- **Pela página visual (localmente):** acesse `http://127.0.0.1:5000/` — tem campo de busca
+  por sintomas, botões de teste rápido com casos já validados, e um botão para listar todos
+  os pontos.
 - **Por linha de comando (PowerShell):**
   ```powershell
   Invoke-RestMethod -Uri "http://127.0.0.1:5000/pontos/recomendar" -Method Post -ContentType "application/json" -Body (@{sintomas=@("ansiedade aguda")} | ConvertTo-Json)
   ```
+
+## Testes automatizados
+
+Suíte com **7 testes** usando `pytest`, dividida em duas camadas:
+
+- `tests/test_repository.py` (4 testes de unidade) — testam a lógica de matching de
+  sintomas diretamente no `repository`: sintoma único, múltiplos pontos sem duplicar,
+  normalização de maiúsculas/acentos e sintoma inexistente (lista vazia).
+- `tests/test_app.py` (3 testes de integração) — testam os endpoints via
+  `app.test_client()` do Flask: recomendação com sintoma válido, erro 400 quando o
+  campo `sintomas` não é enviado, e listagem de todos os pontos.
+
+Para rodar:
+
+```bash
+pytest -v
+```
 
 ## Status da entrega
 
@@ -79,5 +102,5 @@ ser adicionados diretamente nesse arquivo, seguindo a mesma estrutura de campos.
 - [x] Base de dados real cadastrada (4 pontos)
 - [x] Lógica de recomendação por sintomas implementada e testada
 - [x] Página visual de apoio para testes manuais
-- [ ] Escolha e desenvolvimento do caminho da avaliação (Design Patterns **ou** Test
-      Suite, conforme o enunciado) — pendente de definição pelo grupo
+- [x] Caminho da avaliação escolhido: **Test Suite** — 7 testes automatizados (unidade
+      e integração), todos passando
