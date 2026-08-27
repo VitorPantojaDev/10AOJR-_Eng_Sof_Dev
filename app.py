@@ -45,7 +45,6 @@ def recomendar():
 
 @app.post("/pontos")
 def cadastrar_ponto():
-    # TODO (opcional): validar o corpo recebido antes de cadastrar.
     ponto = request.get_json(silent=True) or {}
     ponto_criado = repository.adicionar(ponto)
     return jsonify(ponto_criado), 201

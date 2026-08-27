@@ -9,9 +9,6 @@ class RecomendacaoService:
         if not sintomas:
             raise ValueError("Informe ao menos um sintoma.")
 
-        # TODO: aqui é o lugar de aplicar Strategy, se for esse o padrão
-        # escolhido no Caminho A (ex.: trocar a estratégia de matching
-        # sem mexer no resto do service).
         pontos_encontrados = self._repository.buscar_por_sintomas(sintomas)
 
         return pontos_encontrados

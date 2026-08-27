@@ -46,10 +46,5 @@ class PontoRepository:
         return resultado
 
     def adicionar(self, ponto: dict) -> dict:
-        """
-        TODO (opcional): validar campos obrigatórios (id, nome, sintomas,
-        localizacao, orientacao) e persistir de volta no JSON, se quiser
-        que o cadastro via POST /pontos seja permanente.
-        """
         self._pontos.append(ponto)
         return ponto

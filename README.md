@@ -6,6 +6,13 @@ Development** (MBA FIAP — Prof. Rafael Matsuyama). O tema foi conectado ao TCC
 informados pelo usuário, o serviço recomenda os pontos de auriculoterapia/acupressão
 associados.
 
+## Equipe
+
+- **Caio Silva Alberto**  — RM 368446
+- **Fábio Luiz de Barros** — RM 368580
+- **Higor Robles de Freitas Pereira**  — RM 368316
+- **Vitor Alencastro Pantoja** — RM 367683
+
 ## Stack
 
 - **Python 3** + **Flask** — servidor e rotas
