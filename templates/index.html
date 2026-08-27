@@ -5,11 +5,12 @@
 <title>Teste - Recomendação de Pontos</title>
 <style>
   :root {
-    --vinho: #7a1f3d;
-    --vinho-escuro: #55152b;
-    --fundo: #faf6f3;
-    --texto: #2b2b2b;
-    --borda: #e0d6d0;
+    --primaria: #2f6f62;
+    --primaria-escura: #1f4a41;
+    --secundaria: #4a6fa5;
+    --fundo: #bcdff0;
+    --texto: #33302a;
+    --borda: #d2e7eb;
   }
   * { box-sizing: border-box; }
   body {
@@ -20,12 +21,13 @@
     padding: 24px;
   }
   .container { max-width: 760px; margin: 0 auto; }
-  h1 { font-size: 1.4rem; margin-bottom: 4px; }
+  h1 { font-size: 1.4rem; margin-bottom: 4px; color: var(--primaria-escura); }
   p.subtitulo { color: #6b6b6b; margin-top: 0; margin-bottom: 24px; font-size: 0.9rem; }
 
   .painel {
     background: white;
     border: 1px solid var(--borda);
+    border-top: 3px solid var(--secundaria);
     border-radius: 10px;
     padding: 18px 20px;
     margin-bottom: 20px;
@@ -43,7 +45,7 @@
   small.dica { display: block; margin-top: 5px; color: #888; font-size: 0.78rem; }
 
   button {
-    background: var(--vinho);
+    background: var(--primaria);
     color: white;
     border: none;
     padding: 9px 16px;
@@ -53,24 +55,24 @@
     margin-top: 12px;
     margin-right: 6px;
   }
-  button:hover { background: var(--vinho-escuro); }
+  button:hover { background: var(--primaria-escura); }
   button.secundario {
     background: white;
-    color: var(--vinho);
-    border: 1px solid var(--vinho);
+    color: var(--primaria);
+    border: 1px solid var(--primaria);
   }
-  button.secundario:hover { background: #f5eaee; }
+  button.secundario:hover { background: #eaf1ee; }
 
   .testes-rapidos { margin-top: 10px; }
   .testes-rapidos button {
-    background: #f0e9e6;
+    background: #daebf0;
     color: var(--texto);
     border: 1px solid var(--borda);
     font-size: 0.8rem;
     padding: 6px 10px;
     margin: 3px 4px 0 0;
   }
-  .testes-rapidos button:hover { background: #e5dbd5; }
+  .testes-rapidos button:hover { background: #dcd4bd; }
 
   #status {
     margin-top: 12px;
@@ -88,7 +90,7 @@
   }
   .ponto .id {
     display: inline-block;
-    background: var(--vinho);
+    background: var(--primaria);
     color: white;
     font-size: 0.72rem;
     padding: 2px 7px;
@@ -98,7 +100,7 @@
   .ponto h3 { margin: 4px 0; font-size: 1rem; }
   .ponto p { margin: 3px 0; font-size: 0.85rem; line-height: 1.4; }
   .ponto .campo-label { font-weight: 600; }
-  .ponto .sintomas { color: var(--vinho-escuro); }
+  .ponto .sintomas { color: var(--primaria-escura); }
 
   #resultado-vazio {
     font-size: 0.85rem;
