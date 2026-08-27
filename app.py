@@ -1,15 +1,3 @@
-"""
-Microsserviço de recomendação de pontos de auriculoterapia/acupressão.
-
-Camadas:
-    app.py (rotas / controller) -> service.py (regra de negócio)
-    -> repository.py (acesso aos dados)
-
-Para rodar:
-    pip install -r requirements.txt
-    python app.py
-"""
-
 from flask import Flask, jsonify, render_template, request
 
 from repository import PontoRepository

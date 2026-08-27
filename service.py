@@ -1,11 +1,3 @@
-"""
-Service: regra de negócio da recomendação.
-
-Depende do repository por injeção de dependência (não instancia o
-repository sozinho) — isso facilita trocar a implementação de dados
-no futuro e também facilita testar o service com um repository "fake".
-"""
-
 from repository import PontoRepository
 
 
