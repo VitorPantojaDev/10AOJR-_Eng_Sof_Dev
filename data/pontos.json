@@ -1,0 +1,30 @@
+[
+  {
+    "id": "PC6",
+    "nome": "Nei Guan - Barreira Interna",
+    "sintomas": ["enjôo", "náusea", "vômito"],
+    "localizacao": "Antebraço, na região palmar/interna. Linha central três dedos de distância da prega do punho. Entre os tendões dos músculos do antebraço.",
+    "orientacao": "Acupressão: Utilize a polpa do polegar ou indicador para aplicar uma pressão firme e constante (ou em pequenos movimentos circulares) até sentir uma sensação leve de peso, dormência ou pressão tolerável. Mantenha de 1 a 3 minutos por ponto."
+  },
+  {
+    "id": "IG4",
+    "nome": "Hegu",
+    "sintomas": ["dor de cabeça", "cefaleia", "enxaqueca", "cólica menstrual", "ansiedade aguda", "dor"],
+    "localizacao": "No dorso da mão, na depressão entre a base do polegar e do indicador (no ápice do músculo primeiro interósseo dorsal quando o polegar está colado ao indicador).",
+    "orientacao": "Acupressão: Utilize a polpa do polegar ou indicador para aplicar uma pressão firme e constante (ou em pequenos movimentos circulares) até sentir uma sensação leve de peso, dormência ou pressão tolerável. Mantenha de 1 a 3 minutos por ponto."
+  },
+  {
+    "id": "C7",
+    "nome": "Shenmen",
+    "sintomas": ["insônia", "ansiedade aguda", "estresse", "tensão muscular"],
+    "localizacao": "Na prega de flexão do punho, do lado ulnar (lado do dedinho), logo ao lado do tendão do músculo flexor ulnar do carpo.",
+    "orientacao": "Acupressão: Utilize a polpa do polegar ou indicador para aplicar uma pressão firme e constante (ou em pequenos movimentos circulares) até sentir uma sensação leve de peso, dormência ou pressão tolerável. Mantenha de 1 a 3 minutos por ponto."
+  },
+  {
+    "id": "Extra3",
+    "nome": "Yintang",
+    "sintomas": ["inquietação", "ansiedade aguda", "estresse", "tensão muscular"],
+    "localizacao": "Na face, ponto médio entre as extremidades mediais das sobrancelhas (região da glabela).",
+    "orientacao": "Acupressão: Utilize a polpa do polegar ou indicador para aplicar uma pressão firme e constante (ou em pequenos movimentos circulares) até sentir uma sensação leve de peso, dormência ou pressão tolerável. Mantenha de 1 a 3 minutos por ponto."
+  }
+]

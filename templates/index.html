@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Teste - Recomendação de Pontos</title>
+<style>
+  :root {
+    --vinho: #7a1f3d;
+    --vinho-escuro: #55152b;
+    --fundo: #faf6f3;
+    --texto: #2b2b2b;
+    --borda: #e0d6d0;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--fundo);
+    color: var(--texto);
+    margin: 0;
+    padding: 24px;
+  }
+  .container { max-width: 760px; margin: 0 auto; }
+  h1 { font-size: 1.4rem; margin-bottom: 4px; }
+  p.subtitulo { color: #6b6b6b; margin-top: 0; margin-bottom: 24px; font-size: 0.9rem; }
+
+  .painel {
+    background: white;
+    border: 1px solid var(--borda);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 20px;
+  }
+  .painel h2 { font-size: 1rem; margin: 0 0 10px 0; }
+
+  label { font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 4px; }
+  input[type=text] {
+    width: 100%;
+    padding: 9px 10px;
+    border: 1px solid var(--borda);
+    border-radius: 6px;
+    font-size: 0.95rem;
+  }
+  small.dica { display: block; margin-top: 5px; color: #888; font-size: 0.78rem; }
+
+  button {
+    background: var(--vinho);
+    color: white;
+    border: none;
+    padding: 9px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.88rem;
+    margin-top: 12px;
+    margin-right: 6px;
+  }
+  button:hover { background: var(--vinho-escuro); }
+  button.secundario {
+    background: white;
+    color: var(--vinho);
+    border: 1px solid var(--vinho);
+  }
+  button.secundario:hover { background: #f5eaee; }
+
+  .testes-rapidos { margin-top: 10px; }
+  .testes-rapidos button {
+    background: #f0e9e6;
+    color: var(--texto);
+    border: 1px solid var(--borda);
+    font-size: 0.8rem;
+    padding: 6px 10px;
+    margin: 3px 4px 0 0;
+  }
+  .testes-rapidos button:hover { background: #e5dbd5; }
+
+  #status {
+    margin-top: 12px;
+    font-size: 0.85rem;
+  }
+  #status.ok { color: #2e7d32; }
+  #status.erro { color: #b3261e; }
+
+  .ponto {
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin-top: 10px;
+    background: #fffdfc;
+  }
+  .ponto .id {
+    display: inline-block;
+    background: var(--vinho);
+    color: white;
+    font-size: 0.72rem;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-bottom: 6px;
+  }
+  .ponto h3 { margin: 4px 0; font-size: 1rem; }
+  .ponto p { margin: 3px 0; font-size: 0.85rem; line-height: 1.4; }
+  .ponto .campo-label { font-weight: 600; }
+  .ponto .sintomas { color: var(--vinho-escuro); }
+
+  #resultado-vazio {
+    font-size: 0.85rem;
+    color: #888;
+    font-style: italic;
+    margin-top: 10px;
+  }
+
+  ul#lista-pontos { padding-left: 18px; font-size: 0.85rem; margin: 0; }
+  ul#lista-pontos li { margin-bottom: 4px; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Teste — Recomendação de Pontos</h1>
+  <p class="subtitulo">Página de apoio só para testar o microsserviço manualmente.</p>
+
+  <div class="painel">
+    <h2>Buscar por sintomas</h2>
+    <label for="campo-sintomas">Sintomas (separados por vírgula)</label>
+    <input type="text" id="campo-sintomas" placeholder="ex.: ansiedade aguda, insônia">
+    <small class="dica">Use vírgula para mais de um sintoma. Maiúsculas/acentos não importam.</small>
+
+    <div>
+      <button onclick="buscarSintomas()">Buscar recomendação</button>
+      <button class="secundario" onclick="listarTodos()">Listar todos os pontos</button>
+    </div>
+
+    <div class="testes-rapidos">
+      <strong style="font-size:0.8rem;">Testes rápidos:</strong><br>
+      <button onclick="testeRapido('insônia')">insônia</button>
+      <button onclick="testeRapido('ansiedade aguda')">ansiedade aguda</button>
+      <button onclick="testeRapido('dor de cabeça, insônia')">dor de cabeça + insônia</button>
+      <button onclick="testeRapido('febre')">sintoma inexistente (febre)</button>
+    </div>
+
+    <div id="status"></div>
+  </div>
+
+  <div class="painel">
+    <h2>Resultado</h2>
+    <div id="resultados"></div>
+    <div id="resultado-vazio" style="display:none;">Nenhum ponto encontrado para os sintomas informados.</div>
+  </div>
+
+  <div class="painel">
+    <h2>Referência — sintomas cadastrados na base</h2>
+    <ul id="lista-pontos"><li>Carregando...</li></ul>
+  </div>
+</div>
+
+<script>
+const status = document.getElementById('status');
+const resultados = document.getElementById('resultados');
+const resultadoVazio = document.getElementById('resultado-vazio');
+
+function mostrarStatus(mensagem, tipo) {
+  status.textContent = mensagem;
+  status.className = tipo;
+}
+
+function renderizarPontos(pontos) {
+  resultados.innerHTML = '';
+  if (!pontos.length) {
+    resultadoVazio.style.display = 'block';
+    return;
+  }
+  resultadoVazio.style.display = 'none';
+  pontos.forEach(p => {
+    const div = document.createElement('div');
+    div.className = 'ponto';
+    div.innerHTML = `
+      <span class="id">${p.id}</span>
+      <h3>${p.nome}</h3>
+      <p class="sintomas"><span class="campo-label">Sintomas:</span> ${p.sintomas.join(', ')}</p>
+      <p><span class="campo-label">Localização:</span> ${p.localizacao}</p>
+      <p><span class="campo-label">Orientação:</span> ${p.orientacao}</p>
+    `;
+    resultados.appendChild(div);
+  });
+}
+
+async function buscarSintomas() {
+  const texto = document.getElementById('campo-sintomas').value.trim();
+  if (!texto) {
+    mostrarStatus('Digite ao menos um sintoma.', 'erro');
+    return;
+  }
+  const sintomas = texto.split(',').map(s => s.trim()).filter(Boolean);
+
+  mostrarStatus('Buscando...', '');
+  try {
+    const resposta = await fetch('/pontos/recomendar', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ sintomas })
+    });
+    const dados = await resposta.json();
+
+    if (!resposta.ok) {
+      mostrarStatus('Erro: ' + (dados.erro || resposta.status), 'erro');
+      renderizarPontos([]);
+      return;
+    }
+    mostrarStatus(`OK — ${dados.length} ponto(s) encontrado(s).`, 'ok');
+    renderizarPontos(dados);
+  } catch (erro) {
+    mostrarStatus('Falha ao conectar com o servidor: ' + erro, 'erro');
+  }
+}
+
+function testeRapido(valor) {
+  document.getElementById('campo-sintomas').value = valor;
+  buscarSintomas();
+}
+
+async function listarTodos() {
+  mostrarStatus('Carregando todos os pontos...', '');
+  try {
+    const resposta = await fetch('/pontos');
+    const dados = await resposta.json();
+    mostrarStatus(`OK — ${dados.length} ponto(s) na base.`, 'ok');
+    renderizarPontos(dados);
+  } catch (erro) {
+    mostrarStatus('Falha ao conectar com o servidor: ' + erro, 'erro');
+  }
+}
+
+async function carregarReferencia() {
+  const lista = document.getElementById('lista-pontos');
+  try {
+    const resposta = await fetch('/pontos');
+    const dados = await resposta.json();
+    lista.innerHTML = '';
+    dados.forEach(p => {
+      const li = document.createElement('li');
+      li.innerHTML = `<strong>${p.id} - ${p.nome}:</strong> ${p.sintomas.join(', ')}`;
+      lista.appendChild(li);
+    });
+  } catch (erro) {
+    lista.innerHTML = '<li>Não foi possível carregar (servidor no ar?).</li>';
+  }
+}
+
+carregarReferencia();
+</script>
+</body>
+</html>
