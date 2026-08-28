@@ -6,6 +6,10 @@ Development** (MBA FIAP — Prof. Rafael Matsuyama). O tema foi conectado ao TCC
 informados pelo usuário, o serviço recomenda os pontos de auriculoterapia/acupressão
 associados.
 
+**Repositório:** https://github.com/VitorPantojaDev/10AOJR-_Eng_Sof_Dev
+
+**Deploy:** https://qia-microsservice.vercel.app/
+
 ## Equipe
 
 - **Caio Silva Alberto**  — RM 368446
