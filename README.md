@@ -1,10 +1,10 @@
 # Serviço de Recomendação de Pontos de Auriculoterapia/Acupressão
 
-Microsserviço desenvolvido para a Avaliação Final da disciplina **Engineering Software
-Development** (MBA FIAP — Prof. Rafael Matsuyama). O tema foi conectado ao TCC do grupo
-(aplicativo de autocuidado com IA e terapias integrativas): dado um ou mais sintomas
-informados pelo usuário, o serviço recomenda os pontos de auriculoterapia/acupressão
-associados.
+Microsserviço desenvolvido para a Avaliação Final da disciplina Engineering Software Development (MBA FIAP — Prof. Rafael Matsuyama). O tema foi conectado ao TCC do grupo (aplicativo de autocuidado com IA e terapias integrativas): dado um ou mais sintomas informados pelo usuário, o serviço recomenda os pontos de auriculoterapia/acupressão associados.
+
+Repositório: https://github.com/VitorPantojaDev/10AOJR-_Eng_Sof_Dev
+
+Deploy: https://qia-microsservice.vercel.app/
 
 ## Equipe
 
